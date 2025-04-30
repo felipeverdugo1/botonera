@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+
+# Archivos de entorno
+.env
+
+# Archivos generados por el sistema o editores
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Salida de sonido
+sounds/
+audio/
+downloads/
+
+# Archivos temporales o de caché
+*.log
+*.tmp
+.cache/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
