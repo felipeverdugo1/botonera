@@ -1,0 +1,36 @@
+name: Node.js CI
+
+# Se ejecuta en cada Push o Pull Request a la rama principal
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  check-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Copia el código del repositorio al servidor de GitHub
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      # 2. Configura el entorno de Node.js
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Agiliza futuras ejecuciones guardando en caché las dependencias
+
+      # 3. Instalación estricta usando el package-lock.json
+      - name: Instalar dependencias
+        run: npm ci
+
+      # 4. Chequeo de Linter / Sintaxis
+      - name: Ejecutar Linter
+        run: npm run lint
+
+      # 5. Generación/Verificación del paquete
+      - name: Construir proyecto
+        run: npm run build

@@ -1,12 +1,11 @@
 import { getConnection } from '../utils/voice';
-import { createAudioPlayer, createAudioResource } from '@discordjs/voice';
-import ytdl from 'ytdl-core';
+import { createAudioPlayer } from '@discordjs/voice';
 
 export const name = 'interactionCreate';
 export async function execute(interaction) {
     if (!interaction.isButton()) return;
 
-    const [type, soundName] = interaction.customId.split('_');
+    const soundName = interaction.customId.split('_')[1];
     const voiceChannel = interaction.member.voice.channel;
 
     if (!voiceChannel) {
@@ -17,15 +16,17 @@ export async function execute(interaction) {
 
     try {
         let connection = getConnection();
-        if (!connection) {
-        }
+        if (connection) {
+        
 
-        const player = createAudioPlayer();
-        connection.subscribe(player);
+        	const player = createAudioPlayer();
+        	connection.subscribe(player);
 
-        // Lógica de reproducción...
-        interaction.followUp({ content: `🔊 Sonido: ${soundName}`, ephemeral: true });
-    } catch (error) {
+        	// Lógica de reproducción...
+        	interaction.followUp({ content: `🔊 Sonido: ${soundName}`, ephemeral: true });
+    		} 
+    	}
+    catch (error) {
         console.error(error);
         interaction.followUp({ content: '❌ Error al reproducir.', ephemeral: true });
     }
