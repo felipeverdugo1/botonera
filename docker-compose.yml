@@ -1,0 +1,15 @@
+
+
+services:
+  node_bot_service:
+    build: .
+    container_name: node_bot
+    ports:
+      - "3000:3000"
+    env_file:
+     - .env
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    # Opcional: si usas nodemon para reinicio automático
+    # command: npm run dev
